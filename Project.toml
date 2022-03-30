@@ -1,0 +1,7 @@
+name = "OnnxReader"
+uuid = "070f6fb0-48e7-4331-b5f5-4b1c0793f6e0"
+authors = ["philipp <philipp.kern@kit.edu>"]
+version = "0.1.0"
+
+[deps]
+PyCall = "438e738f-606a-5dbb-bf0a-cddfbfd45ab0"
