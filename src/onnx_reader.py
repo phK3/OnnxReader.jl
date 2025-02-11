@@ -1,3 +1,4 @@
+import warnings
 import numpy as np
 import onnx
 from onnx import numpy_helper
@@ -135,7 +136,9 @@ class OnnxReader:
                 # why is input of the layer not in input_map?
                 if len([d.dim_value for d in input_map[find_node_with_input(model.graph, network_input).input[0]].type.tensor_type.shape.dim if d.dim_value > 1]) > 1:
                 #if len([d.dim_value for d in input_map[cur_node.input[0]].type.tensor_type.shape.dim if d.dim_value > 1]) > 1:
-                    raise ValueError('Flatten layer is not implemented yet!')
+                    warnings.warn(f"Flatten layer had input shape: {[d.dim_value for d in input_map[find_node_with_input(model.graph, network_input).input[0]].type.tensor_type.shape.dim]}\nIgnoring Flatten layer!")
+                    layers.append((None, None, 'Flatten'))
+                    #raise ValueError('Flatten layer is not implemented yet!')
                 else:
                     print("Safely ignoring Flattening layer.")
                     layers.append((None, None, 'Flatten'))
